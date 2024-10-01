@@ -15,6 +15,9 @@
 Помогите выбрать рыцарей в поход.*/
 using namespace std;
 
+const int numberKnightsTable = 12;
+const int numberMarchingKnights = 5;
+
 int main()
 {
     std::cout << "Hi World!\n";
