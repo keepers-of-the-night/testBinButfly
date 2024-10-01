@@ -15,33 +15,47 @@
 Помогите выбрать рыцарей в поход.*/
 using namespace std;
 
+//Общее кол-во рыцарей и ко-во для похода
 const int numberKnightsTable = 12;
 const int numberMarchingKnights = 5;
 
+//Функция поиска рыцарей
 void findTeamForHike(int numberKnightsTable, int numThreads);
+//Функция выборки 5ти рыцарей
 void selectionKnights(int startId, int loadThread);
 int main()
 {
+    // Выбор кол-ва потоков
     int numThreads;
     do {
         cout << "Enter the number of threads : divisor " << numberKnightsTable << endl;
         cin >> numThreads;
         cout << endl;
     } while (12 % numThreads != 0);
+    //Функция поиска рыцарей
     findTeamForHike(numberKnightsTable, numThreads);
 }
+
+//Описание функции поиска рыцарей
 void findTeamForHike(int numberKnightsTable, int numThreads) {
+    //Количество "обрабатываемых" рыцарей в одном потоке
     int loadThread = numberKnightsTable / numThreads;
+    //вектор потоков
     vector<thread> threads;
+    //Начальный номер рыцаря для каждого потока
     int startId;
     for (int i = 0; i < numThreads - 1; i++) {
         startId = i * loadThread;
+        //Добавление потока 
         threads.emplace_back(selectionKnights, startId, loadThread);
     }
+    //Запуск потоков
     for (auto& thread : threads) {
         thread.join();
     }
 }
+
+//Описание функции выборки 5ти рыцарей
 void selectionKnights(int startId, int loadThread) {
     cout << endl << "New Thread" << endl;
     for (int i = startId; i < startId + loadThread; i++) {
@@ -49,7 +63,7 @@ void selectionKnights(int startId, int loadThread) {
             for (int k = j + 1; k < numberKnightsTable - 2; k++)
                 for (int z = k + 1; z < numberKnightsTable - 1; z++)
                     for (int l = z + 1; l < numberKnightsTable; l++) {
-                        if (abs(i - j) > 1 && abs(k - j) > 1 && abs(k - z) > 1 && abs(z - l) > 1 && abs(i - z) != 11) {
+                        if (abs(i - j) > 1 && abs(k - j) > 1 && abs(k - z) > 1 && abs(z - l) > 1 && abs(i - l) != 11) {
                             cout << i << ' ' << j << ' ' << k << ' ' << z << ' ' << l << endl;
                         }
                     }
