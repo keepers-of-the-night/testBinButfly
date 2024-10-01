@@ -24,9 +24,10 @@ int main()
 {
     int numThreads;
     do {
-        cout << "Enter the number of threads : divisor " << numberKnightsTable;
+        cout << "Enter the number of threads : divisor " << numberKnightsTable << endl;
         cin >> numThreads;
-    } while (numThreads > 0 && 12 % numThreads == 0);
+        cout << endl;
+    } while (12 % numThreads != 0);
     findTeamForHike(numberKnightsTable, numThreads);
 }
 void findTeamForHike(int numberKnightsTable, int numThreads) {
@@ -37,9 +38,12 @@ void findTeamForHike(int numberKnightsTable, int numThreads) {
         startId = i * loadThread;
         threads.emplace_back(selectionKnights, startId, loadThread);
     }
+    for (auto& thread : threads) {
+        thread.join();
+    }
 }
 void selectionKnights(int startId, int loadThread) {
-    cout << endl << "Новый поток" << endl;
+    cout << endl << "New Thread" << endl;
     for (int i = startId; i < startId + loadThread; i++) {
         for (int j = i + 1; j < numberKnightsTable - 3; j++)
             for (int k = j + 1; k < numberKnightsTable - 2; k++)
