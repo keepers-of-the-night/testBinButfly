@@ -39,12 +39,15 @@ void findTeamForHike(int numberKnightsTable, int numThreads) {
     }
 }
 void selectionKnights(int startId, int loadThread) {
+    cout << endl << "Новый поток" << endl;
     for (int i = startId; i < startId + loadThread; i++) {
         for (int j = i + 1; j < numberKnightsTable - 3; j++)
             for (int k = j + 1; k < numberKnightsTable - 2; k++)
                 for (int z = k + 1; z < numberKnightsTable - 1; z++)
                     for (int l = z + 1; l < numberKnightsTable; l++) {
-                        if()
+                        if (abs(i - j) > 1 && abs(k - j) > 1 && abs(k - z) > 1 && abs(z - l) > 1 && abs(i - z) != 11) {
+                            cout << i << ' ' << j << ' ' << k << ' ' << z << ' ' << l << endl;
+                        }
                     }
     }
 }
