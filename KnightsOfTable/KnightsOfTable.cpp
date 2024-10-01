@@ -19,7 +19,7 @@ const int numberKnightsTable = 12;
 const int numberMarchingKnights = 5;
 
 void findTeamForHike(int numberKnightsTable, int numThreads);
-
+void selectionKnights(int startId, int loadThread);
 int main()
 {
     int numThreads;
@@ -32,9 +32,22 @@ int main()
 void findTeamForHike(int numberKnightsTable, int numThreads) {
     int loadThread = numberKnightsTable / numThreads;
     vector<thread> threads;
-
+    int startId;
+    for (int i = 0; i < numThreads - 1; i++) {
+        startId = i * loadThread;
+        threads.emplace_back(selectionKnights, startId, loadThread);
+    }
 }
-
+void selectionKnights(int startId, int loadThread) {
+    for (int i = startId; i < startId + loadThread; i++) {
+        for (int j = i + 1; j < numberKnightsTable - 3; j++)
+            for (int k = j + 1; k < numberKnightsTable - 2; k++)
+                for (int z = k + 1; z < numberKnightsTable - 1; z++)
+                    for (int l = z + 1; l < numberKnightsTable; l++) {
+                        if()
+                    }
+    }
+}
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
 // Отладка программы: F5 или меню "Отладка" > "Запустить отладку"
 
