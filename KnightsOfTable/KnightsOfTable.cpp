@@ -18,6 +18,8 @@ using namespace std;
 const int numberKnightsTable = 12;
 const int numberMarchingKnights = 5;
 
+void findTeamForHike(int numberKnightsTable, int numThreads);
+
 int main()
 {
     int numThreads;
@@ -25,7 +27,12 @@ int main()
         cout << "Enter the number of threads : divisor " << numberKnightsTable;
         cin >> numThreads;
     } while (numThreads > 0 && 12 % numThreads == 0);
-    std::cout << "Hi World!\n";
+    findTeamForHike(numberKnightsTable, numThreads);
+}
+void findTeamForHike(int numberKnightsTable, int numThreads) {
+    int loadThread = numberKnightsTable / numThreads;
+    vector<thread> threads;
+
 }
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
