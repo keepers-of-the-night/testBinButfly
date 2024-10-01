@@ -20,6 +20,11 @@ const int numberMarchingKnights = 5;
 
 int main()
 {
+    int numThreads;
+    do {
+        cout << "Enter the number of threads : divisor " << numberKnightsTable;
+        cin >> numThreads;
+    } while (numThreads > 0 && 12 % numThreads == 0);
     std::cout << "Hi World!\n";
 }
 
