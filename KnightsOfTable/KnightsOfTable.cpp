@@ -8,6 +8,7 @@
 #include <cstdlib>
 #include <ctime>
 #include <chrono>
+#include <string>
 /*За круглым столом короля Артура сидят 12 рыцарей. Из них каждый враждует с двумя своими
 соседями. Для участия в спецоперации по освобождению заколдованной принцессы нужно
 выбрать 5 рыцарей, но при этом нельзя посылать вместе рыцарей, враждующих друг с другом.
@@ -27,11 +28,24 @@ int main()
 {
     // Выбор кол-ва потоков
     int numThreads;
-    do {
-        cout << "Enter the number of threads : divisor " << numberKnightsTable << endl;
-        cin >> numThreads;
-        cout << endl;
-    } while (12 % numThreads != 0);
+    string numThreadsNoNumber;
+        do {
+            do {
+                try {
+                    cout << "Enter the number of threads : divisor " << numberKnightsTable << endl;
+                    cin >> numThreadsNoNumber;
+                    cout << endl;
+                    numThreads = stoi(numThreadsNoNumber);
+                }
+            catch (...) {
+                cout << endl << "Error" << endl;
+                return(0);
+            }
+            } while (numThreads == 0);
+        } while (12 % numThreads != 0);
+    
+   
+    
     //Функция поиска рыцарей
     findTeamForHike(numberKnightsTable, numThreads);
 }
@@ -44,7 +58,7 @@ void findTeamForHike(int numberKnightsTable, int numThreads) {
     vector<thread> threads;
     //Начальный номер рыцаря для каждого потока
     int startId;
-    for (int i = 0; i < numThreads - 1; i++) {
+    for (int i = 0; i < numThreads; i++) {
         startId = i * loadThread;
         //Добавление потока 
         threads.emplace_back(selectionKnights, startId, loadThread);
