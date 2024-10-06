@@ -71,6 +71,7 @@ void findTeamForHike(int numberKnightsTable, int numThreads) {
 
 //Описание функции выборки 5ти рыцарей
 void selectionKnights(int startId, int loadThread) {
+    string streamOfThread = "";
     cout << endl << "New Thread" << endl;
     for (int i = startId; i < startId + loadThread; i++) {
         for (int j = i + 1; j < numberKnightsTable - 3; j++)
@@ -78,10 +79,13 @@ void selectionKnights(int startId, int loadThread) {
                 for (int z = k + 1; z < numberKnightsTable - 1; z++)
                     for (int l = z + 1; l < numberKnightsTable; l++) {
                         if (abs(i - j) > 1 && abs(k - j) > 1 && abs(k - z) > 1 && abs(z - l) > 1 && abs(i - l) != 11) {
-                            cout << i << ' ' << j << ' ' << k << ' ' << z << ' ' << l << endl;
+ //                           cout << i << ' ' << j << ' ' << k << ' ' << z << ' ' << l << endl;
+                            streamOfThread += to_string(i) + ' ' + to_string(j) + ' ' + to_string(k) + ' ' + to_string(z) + ' ' + to_string(l) + '\n';
                         }
                     }
+
     }
+    cout << streamOfThread;
 }
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
 // Отладка программы: F5 или меню "Отладка" > "Запустить отладку"
