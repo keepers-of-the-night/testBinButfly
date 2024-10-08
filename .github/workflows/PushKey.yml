@@ -1,0 +1,22 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - Part1/Code
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      # Setup key
+      - run: set -eu
+      - run: mkdir "$HOME/.ssh"
+      - run: echo "$" > "$HOME/.ssh/Vitaly"
+      - run: chmod 600 "$HOME/.ssh/Vitaly"
+      # Build
+      - run: npm ci
+      - run: npm run build
+      # Deploy
+      - run: rsync -e "ssh -p 20022 -i $HOME/.ssh/Vitaly -o StrictHostKeyChecking=no" --archive --compress --delete . git@github.com:keepers-of-the-night/testProject.git
